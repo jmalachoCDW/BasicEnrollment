@@ -1,0 +1,13 @@
+{
+  "body": {
+    "custname": "CDW Dev Account",
+    "address": {
+      "street1": "161 N Clark",
+      "street2": "",
+      "city": "Chicago",
+      "state": "IL",
+      "zipcode": "60601",
+      "country": "US"
+    }
+  }
+}
