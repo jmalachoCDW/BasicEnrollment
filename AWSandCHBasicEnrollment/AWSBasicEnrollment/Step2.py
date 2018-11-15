@@ -11,6 +11,7 @@ from botocore.exceptions import ClientError
 parameters=sys.argv
 account = parameters[1]
 profile = parameters[2]
+bluemoon = parameters[3]
 
 try: 
     # by using the profile included in the arguments, we can switch to the master account 
@@ -33,7 +34,7 @@ try:
         {
           "Effect": "Allow",
           "Principal": {
-            "AWS": "arn:aws:iam::706839808421:root"
+            "AWS": "arn:aws:iam::"+ bluemoon +":root"
           },
           "Action": "sts:AssumeRole",
           "Condition": {}
@@ -49,7 +50,7 @@ try:
     # create the first role and apply the permissions policy
     response = client.create_role(
         Path="/",
-        RoleName='CDWCustomerAccountAccessRole-joe',
+        RoleName='CDWCustomerAccountAccessRole-joe1',
         AssumeRolePolicyDocument=json.dumps(my_managed_policy),
         Description='Cross Account role for CDW to access Customer Account'
     )
@@ -68,13 +69,13 @@ try:
     response = client.put_role_policy(
         PolicyDocument=json.dumps(permissions_policy),
         PolicyName='cdw-cloudhealth-readonly-policy',
-        RoleName='CDWCustomerAccountAccessRole-joe'
+        RoleName='CDWCustomerAccountAccessRole'
     )
     
     # create the second role and apply the permissions policy
     response = client.create_role(
         Path="/",
-        RoleName='AWSCloudFormationStackSetExecutionRole-joe',
+        RoleName='AWSCloudFormationStackSetExecutionRole',
         AssumeRolePolicyDocument=json.dumps(my_managed_policy),
         Description='Cross Account role for CDW to access Customer Account'
     )
