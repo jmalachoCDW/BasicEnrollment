@@ -8,8 +8,13 @@ import sys
 from botocore.exceptions import ClientError
 
 parameters=sys.argv
+
 account = parameters[1]
+account = account[account.find("=")+1:]
+
 profile = parameters[2]
+profile = profile[profile.find("=")+1:]
+
 
 try:
     # this code writes a new profile to the AWS config file to allow BlueMoon to use the CDWCustomerAccountAccessRole
@@ -34,6 +39,7 @@ try:
             'us-east-2'
         ]
     )
+    print ("Stack Instance created successfully")
    
 except ClientError as e:
     print ("Unexpected Error:", e)

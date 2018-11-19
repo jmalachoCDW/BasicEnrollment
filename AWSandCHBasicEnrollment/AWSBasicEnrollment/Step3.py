@@ -7,8 +7,14 @@ import boto3
 import sys
 
 parameters=sys.argv
+
 account = parameters[1]
+account = account[account.find("=")+1:]
+
 profile = parameters[2]
+profile = profile[profile.find("=")+1:]
+
+
 from botocore.exceptions import ClientError
 
 # does the AWS account exist in CloudHealth already - true or false
@@ -29,6 +35,7 @@ try:
         name='CreateLinktoCH-3',
         input=input_line
     )
+    print ("State Machine sucessfully started")
     
 except ClientError as e:
     print ("Unexpected Error:", e)

@@ -18,6 +18,7 @@ try:
         Bucket="cft-crossaccount-organizationaccessrolev2",
         Key="config.json"
     )
+    print ("Config.json file sucessfully uploaded")
    
 except ClientError as e:
     print ("Unexpected Error:", e)

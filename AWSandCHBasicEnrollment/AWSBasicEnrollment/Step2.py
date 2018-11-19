@@ -9,9 +9,17 @@ import json
 from botocore.exceptions import ClientError
 
 parameters=sys.argv
+
 account = parameters[1]
+account = account[account.find("=")+1:]
+
 profile = parameters[2]
+profile = profile[profile.find("=")+1:]
+
 bluemoon = parameters[3]
+bluemoon = bluemoon[bluemoon.find("=")+1:]
+
+
 
 try: 
     # by using the profile included in the arguments, we can switch to the master account 
@@ -72,6 +80,8 @@ try:
         RoleName='CDWCustomerAccountAccessRole'
     )
     
+    print ("CDWCustomerAccessRole created Successfully")
+    
     # create the second role and apply the permissions policy
     response = client.create_role(
         Path="/",
@@ -85,6 +95,9 @@ try:
         PolicyName='cdw-cloudhealth-readonly-policy',
         RoleName='AWSCloudFormationStackSetExecutionRole'
     )
+
+    print ("AWSCloudFormationStackSetExecutionRole created Successfully")
+
 
 except ClientError as e:
     print ("Unexpected Error:", e)

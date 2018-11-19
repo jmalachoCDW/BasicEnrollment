@@ -9,11 +9,21 @@ from botocore.exceptions import ClientError
 
 try: 
     parameters=sys.argv
+    
     profile = parameters[1]
+    profile = profile[profile.find("=")+1:]
+
     emailId = parameters[2]
+    emailId = emailId[emailId.find("=")+1:]
+
     accountName = parameters[3]
+    accountName = accountName[accountName.find("=")+1:]
+
     roleName = parameters[4]
+    roleName = roleName[roleName.find("=")+1:]
+
     iamUserAccessToBilling = parameters[5]
+    iamUserAccessToBilling = iamUserAccessToBilling[iamUserAccessToBilling.find("=")+1:]
     
     session = boto3.Session(profile_name=profile)
     client = session.client('organizations')
@@ -33,7 +43,7 @@ try:
     # AccountId = response['CreateAccountStatus']['AccountId']
     State = response['CreateAccountStatus']['State']
 
-    print (Id)
+    print ("Command Processed Sucessfully")
 
 except ClientError as e:
     print ("Unexpected Error:", e)
