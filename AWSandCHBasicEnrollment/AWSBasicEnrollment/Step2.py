@@ -50,7 +50,7 @@ try:
     # create the first role and apply the permissions policy
     response = client.create_role(
         Path="/",
-        RoleName='CDWCustomerAccountAccessRole-joe1',
+        RoleName='CDWCustomerAccountAccessRole',
         AssumeRolePolicyDocument=json.dumps(my_managed_policy),
         Description='Cross Account role for CDW to access Customer Account'
     )
@@ -83,7 +83,7 @@ try:
     response = client.put_role_policy(
         PolicyDocument=json.dumps(permissions_policy),
         PolicyName='cdw-cloudhealth-readonly-policy',
-        RoleName='AWSCloudFormationStackSetExecutionRole-joe'
+        RoleName='AWSCloudFormationStackSetExecutionRole'
     )
 
 except ClientError as e:
