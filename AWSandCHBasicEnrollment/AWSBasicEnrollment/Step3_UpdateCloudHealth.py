@@ -19,6 +19,8 @@ from botocore.exceptions import ClientError
 
 # does the AWS account exist in CloudHealth already - true or false
 newaccount = parameters[3]
+newaccount = newaccount[newaccount.find("=")+1:]
+
 arn = "arn:aws:states:us-east-2:"+account+":stateMachine:CloudHealth-Basic-Enrollment"
 
 input_line="{\"role\":\"CDW-CH-ReadOnly-Role\",\"account\":\""+account+"\",\"newaccount\":"+newaccount+"}"
